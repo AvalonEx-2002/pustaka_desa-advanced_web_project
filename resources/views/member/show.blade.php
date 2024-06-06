@@ -68,6 +68,7 @@
                             <th>Book Title</th>
                             <th>Borrow Date</th>
                             <th>Return Date</th>
+                            <th style="text-align:center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -75,7 +76,14 @@
                         <tr>
                             <td>{{ $record->book->title }}</td>
                             <td>{{ \Carbon\Carbon::parse($record->borrowDate)->format('d-m-Y') }}</td>
-                            <td>{{ $record->returnDate ? \Carbon\Carbon::parse($record->returnDate)->format('d-m-Y') : 'Not Returned' }}</td>
+                            <td style="{{ $record->returnDate ? '' : 'font-weight:bold; color:red;' }}">{{ $record->returnDate ? \Carbon\Carbon::parse($record->returnDate)->format('d-m-Y') : 'Not Returned' }}</td>
+                            <td style="text-align: center;">
+                                <form method="POST" action="{{ route('borrowRecord.destroy', $record->id) }}" style="display: inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

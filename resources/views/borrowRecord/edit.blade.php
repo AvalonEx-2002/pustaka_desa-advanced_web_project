@@ -33,6 +33,7 @@
             <label for="borrowDate" class="form-label">Borrow Date</label>
             <input type="date" class="form-control" id="borrowDate" name="borrowDate" value="{{ $borrowRecord->borrowDate }}" required>
         </div>
+
         <div class="mb-3">
             <label for="returnDate" class="form-label">Return Date</label>
             <input type="date" class="form-control" id="returnDate" name="returnDate" value="{{ $borrowRecord->returnDate ? $borrowRecord->returnDate : '' }}">
@@ -43,3 +44,23 @@
     </form>
 </div>
 @endsection
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const borrowDateInput = document.getElementById('borrowDate');
+        const returnDateInput = document.getElementById('returnDate');
+
+        const validateDates = () => {
+            if (returnDateInput.value && borrowDateInput.value) {
+                if (returnDateInput.value < borrowDateInput.value) {
+                    returnDateInput.setCustomValidity('Return date must be greater than or equal to borrow date');
+                } else {
+                    returnDateInput.setCustomValidity('');
+                }
+            }
+        };
+
+        borrowDateInput.addEventListener('change', validateDates);
+        returnDateInput.addEventListener('change', validateDates);
+    });
+</script>
