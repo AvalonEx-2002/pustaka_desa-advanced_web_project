@@ -10,7 +10,7 @@
 
         <div class="card-body">
             <div>
-                <table class="table table-striped table-hover">
+                <table class="table table-striped table-bordered border-dark table-hover">
                     <tr>
                         <td>
                             <strong>Title</strong>

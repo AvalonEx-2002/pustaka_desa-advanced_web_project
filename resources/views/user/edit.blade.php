@@ -23,6 +23,8 @@
                 <label for="email">Email Address</label>
             </div>
 
+            @can('isAdmin')
+            @cannot('manageOwnAccount', $user)
             <div class="form-floating mb-3">
                 <select name="accountStatus" class="form-select" id="accountStatus">
                     <option value="Authorized" {{ $user->accountStatus == 'Authorized' ? 'selected' : '' }}>Authorized</option>
@@ -30,6 +32,16 @@
                 </select>
                 <label for="accountStatus">Account Status</label>
             </div>
+            @else
+            <div class="form-floating mb-3">
+                <select name="accountStatus" class="form-select" id="accountStatus" disabled>
+                    <option value="Authorized" {{ $user->accountStatus == 'Authorized' ? 'selected' : '' }}>Authorized</option>
+                    <option value="Suspended" {{ $user->accountStatus == 'Suspended' ? 'selected' : '' }}>Suspended</option>
+                </select>
+                <label for="accountStatus">Account Status</label>
+            </div>
+            @endcannot
+            @endcan
 
             <div class="form-floating mb-3">
                 <input name="password" type="password" class="form-control" id="password" placeholder="New Password">

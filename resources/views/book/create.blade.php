@@ -28,12 +28,12 @@
             </div>
 
             <div class="form-floating mb-3">
-                <input name="publishYear" type="year" class="form-control" id="publishYear" placeholder="Publish Year" required>
+                <input name="publishYear" type="number" class="form-control" id="publishYear" placeholder="Publish Year" min="1000" max="9999" required>
                 <label for="publishYear">Publish Year</label>
             </div>
 
             <div class="form-floating mb-3">
-                <input name="quantity" type="integer" class="form-control" id="quantity" placeholder="Quantity" required>
+                <input name="quantity" type="number" class="form-control" id="quantity" placeholder="Quantity" min="1" step="1" required>
                 <label for="quantity">Quantity</label>
             </div>
 

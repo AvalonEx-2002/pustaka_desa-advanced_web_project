@@ -78,7 +78,11 @@ class UserController extends Controller
     {
         $user->name = $request->input('name');
         $user->email = $request->input('email');
-        $user->accountStatus = $request->input('accountStatus');
+
+        // Check if user is an Admin and is not editing own account
+        if (Gate::allows('isAdmin') && Gate::denies('manageOwnAccount', $user)) {
+            $user->accountStatus = $request->input('accountStatus');
+        }
 
         // Update password if provided
         if ($request->filled('password')) {
